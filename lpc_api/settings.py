@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #sempre colocar estes dois serumaninhos nos meus projetos
     'evento',
     'tastypie',
 ]

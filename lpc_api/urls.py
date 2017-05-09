@@ -16,33 +16,49 @@ Including another URLconf
 from django.conf.urls import url, include
 from tastypie.api import Api
 from django.contrib import admin
-from evento.api.resources import TipoInscricaoResource, UserResource, InscricaoResource, PessoaFisicaResource
+from evento.api.resources import *
 
 from evento.views import *
 
 v1_api = Api(api_name='v1')
 v1_api.register(TipoInscricaoResource())
+v1_api.register(EventoResource())
+v1_api.register(EventoCientificoResource())
+v1_api.register(PessoaResource())
+v1_api.register(PessoaJuridicaResource())
+v1_api.register(PessoaFisicaResource())
+v1_api.register(AutorResource())
+v1_api.register(ArtigoCientificoResource())
+v1_api.register(ArtigoAutorResource())
+
 v1_api.register(UserResource())
 v1_api.register(InscricaoResource())
-v1_api.register(PessoaFisicaResource())
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='index'),
     url(r'^eventos/', listaEventos, name='listaEventos'),
     url(r'^evento/([0-9]{1})', eventoid, name='eventoId'),
+
     url(r'^eventoscientificos/', listaEventoCientifico, name='listaEventoCientifico'),
     url(r'^eventocientifico/([0-9]{1})/', eventoCientificoid, name='eventoCientificoid'),
+
     url(r'^pessoas/', listaPessoas, name='listaPessoas'),
     url(r'^pessoa/([0-9]{1})/',pessoaid, name='pessoaid'),
+
     url(r'^pessoasfisicas/', listaPessoasFisicas, name='listaPessoasFisicas'),
     url(r'^pessoafisica/([0-9]{1})', pessoaFisicaid, name='pessoaFisicaid'),
+
     url(r'^pessoasjuridicas/', listaPessoasJuridicas, name='listaPessoasJuridicas'),
     url(r'^pessoajuridica/([0-9]{1})', pessoaJuridicaid, name='pessoaJuridicaid'),
+
     url(r'^autores/', listaAutores, name='listaAutores'),
     url(r'^autor/([0-9]{1})', autorid, name='autorid'),
+
     url(r'^artigoscientificos/', listaArtigosCientificos, name='listaArtigosCientificos'),
     url(r'^artigocientifico/([0-9]{1})', artigocientificoid, name='artigocientificoid'),
+    
     url(r'^eventoinscricoes/([0-9]{1})', listainscricoes, name='listainscricoes'),
     url(r'^api/', include(v1_api.urls)),
 ]
